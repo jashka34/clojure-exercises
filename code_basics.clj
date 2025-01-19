@@ -1,7 +1,18 @@
 (ns code-basics
   (:require [clojure.string :refer [upper-case]]))
 
-;; code-basics.com 20/50
+;; *********** code-basics.com 21/50 ***********
+
+(defn increment-numbers [l]
+  (map inc (filter number? l)))
+
+(defn test-increment-number []
+  (assert (= (list 3 5 7) (increment-numbers (list 2 4 6))))
+  (assert (= (list 11 8/5) (increment-numbers (list 10 "foo" false (list 2 3) 3/5)))))
+
+(test-increment-number)
+
+;; ********** code-basics.com 20/50 **********
 
 (defn maps [fl al]
   ;; (println "m_fl" meta fl)
@@ -23,7 +34,7 @@
     (assert (= (list reslist1 reslist2) (maps arglist1 (list arglist21 arglist22))))))
 (test-maps)
 
-;; code-basics.com 19/50
+;; ********** code-basics.com 19/50 **********
 (defn triple [x]
   (list x x x))
 
@@ -35,7 +46,7 @@
 
 (test-triple)
 
-;; code-basics.com 18/50
+;; ********** code-basics.com 18/50 **********
 (defn do-today [d]
   (println d "type is int?" (if (int? d) "int!" "not int..."))
   (println d "type is string?" (if (string? d) "string!" "not string..."))
@@ -58,7 +69,7 @@
 
 (test-do-today)
 
-;; code-basics.com 17/50
+;; ********** code-basics.com 17/50 **********
 (defn programmer-level [n]
   (cond
     (and (>= n 0) (<= n 10)) "junior"
@@ -72,7 +83,7 @@
 
 (test-programmer-level)
 
-;; code-basics.com 16/50
+;; ********** code-basics.com 16/50 **********
 (defn humanize-permission [s]
   (case s
     "x" "execute"
@@ -83,7 +94,7 @@
  (humanize-permission "r")
  (humanize-permission "w")]
 
-;; code-basics.com 15/50
+;; ********** code-basics.com 15/50 **********
 (defn say-boom [s]
   (when (= s "go")
     "Boom!"))
@@ -91,14 +102,14 @@
 (say-boom "hey")
 (say-boom "go")
 
-;; code-basics.com 14/50
+;; ********** code-basics.com 14/50 **********
 (defn sentence-type [s]
   (if  (= s (upper-case s)) "cry" "common"))
 
 (sentence-type "HOW ARE YOU?") ; "cry"
 (sentence-type "Hello, world!") ; "common"
 
-;; code-basics.com 13/50
+;; ********** code-basics.com 13/50 **********
 (defn leap-year? [y]
   (let [r100 (= (mod y 100) 0)
         r400 (= (mod y 400) 0)
