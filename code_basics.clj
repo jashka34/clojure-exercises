@@ -1,6 +1,28 @@
 (ns code-basics
   (:require [clojure.string :refer [upper-case]]))
 
+;; code-basics.com 20/50
+
+(defn maps [fl al]
+  ;; (println "m_fl" meta fl)
+  ;; (println "m_al" al)
+  (println "m" map fl al)
+  (println "mm" (map map fl al))
+  (map map fl al))
+
+(defn test-maps []
+  (let [arglist1 (list inc string?)
+        arglist21 (list 10 20)
+        arglist22 (list "a" 0)
+        reslist1 (list 11 21)
+        reslist2 (list true false)]
+    (println "al1" arglist1)
+    (println "al2" (list arglist21 arglist22))
+    (println "rl1" reslist1 "rl2" reslist2)
+    ;; (maps arglist1 (list arglist21 arglist22))
+    (assert (= (list reslist1 reslist2) (maps arglist1 (list arglist21 arglist22))))))
+(test-maps)
+
 ;; code-basics.com 19/50
 (defn triple [x]
   (list x x x))
