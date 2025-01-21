@@ -12,7 +12,10 @@
 ;; (defn max-delta [l1 l2]
 ;;   (reduce max 0 (map Math/abs (map - l1 l2))))
 
-(max-delta '(10 -15 35) '(2 -12 42))
+;; решение учителя
+;; (defn max-delta [xs ys]
+;;   (reduce (fn [acc [x y]] (max acc (Math/abs (- x y))))
+          ;; 0 (map list xs ys)))
 
 (defn test-max-delta []
   (assert (= 0 (max-delta '() '())))
