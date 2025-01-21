@@ -1,6 +1,27 @@
 (ns code-basics
   (:require [clojure.string :refer [upper-case]]))
 
+;; *********** code-basics.com 22/50 ***********
+(defn max-delta [l1 l2]
+  (let [dm (fn [[x y]] (Math/abs (- x y)))
+        tmpl (map list l1 l2)
+        tmpd (map dm tmpl)]
+    (println "1:" tmpl "2:" tmpd)
+    (reduce max 0 tmpd)))
+
+;; (defn max-delta [l1 l2]
+;;   (reduce max 0 (map Math/abs (map - l1 l2))))
+
+(max-delta '(10 -15 35) '(2 -12 42))
+
+(defn test-max-delta []
+  (assert (= 0 (max-delta '() '())))
+  (assert (= 10 (max-delta '(-15) '(-5))))
+  (assert (= 42 (max-delta '(0) '(42))))
+  (assert (= 8 (max-delta '(10 -15 35) '(2 -12 42)))))
+
+(test-max-delta)
+
 ;; *********** code-basics.com 21/50 ***********
 
 (defn increment-numbers [l]
