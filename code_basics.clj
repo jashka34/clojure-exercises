@@ -1,6 +1,33 @@
 (ns code-basics
   (:require [clojure.string :refer [upper-case]]))
 
+;; *********** code-basics.com 23/50 ***********
+(defn lookup [str lkp]
+  ;; (println str "lkp:" lkp)
+  (let [fnd (filter (fn [pair] (= str (first pair))) lkp)
+        res (if (empty? fnd)
+              false
+              (first fnd))]
+    ;; (println "1:" fnd "2:" res )
+    res))
+
+;; Решение учителя
+;; (defn lookup [key pairs]
+;;   (letfn [(same-key? [kv] (= key (first kv)))]
+;;     (let [found-pairs (filter same-key? pairs)]
+;;       (if (empty? found-pairs)
+;;         false
+;;         (first found-pairs)))))
+
+(defn test-lookup []
+  (def user-ages (list '("Tom" 31)
+                       '("Alice" 22)
+                       '("Bob" 42)))
+  (assert (= '("Bob" 42) (lookup "Bob" user-ages)))
+  (assert (= '("Tom" 31) (lookup "Tom" user-ages)))
+  (assert (= false (lookup "Joe" user-ages))))
+(test-lookup)
+
 ;; *********** code-basics.com 22/50 ***********
 (defn max-delta [l1 l2]
   (let [dm (fn [[x y]] (Math/abs (- x y)))
@@ -15,7 +42,7 @@
 ;; решение учителя
 ;; (defn max-delta [xs ys]
 ;;   (reduce (fn [acc [x y]] (max acc (Math/abs (- x y))))
-          ;; 0 (map list xs ys)))
+;;       0 (map list xs ys)))
 
 (defn test-max-delta []
   (assert (= 0 (max-delta '() '())))
