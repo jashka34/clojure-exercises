@@ -1,5 +1,22 @@
 (ns code-basics
-  (:require [clojure.string :refer [upper-case]]))
+  (:require [clojure.string :refer [upper-case]])
+  (:require [clojure.string :as str]))
+
+;; *********** code-basics.com 26/50 ***********
+
+;; *********** code-basics.com 25/50 ***********
+; почему-то не работает в REPL
+
+(defn str-reverse [s1]
+  (str/reverse s1))
+
+(str-reverse "Hello")
+
+(defn test-str-reverse []
+  (assert (= "olleH" (str-reverse "Hello")))
+  (assert (= "" (str-reverse ""))))
+
+(test-str-reverse)
 
 ;; *********** code-basics.com 24/50 ***********
 
@@ -7,7 +24,7 @@
   ([n l] (skip n l 0))
   ([n l acc]
    (println "1:" n "2:" l "acc:" acc "count:" (count l))
-   (if (or (empty? l) (= n 0) (= acc n) (< n 0))
+   (if (or (empty? l) (<= n 0) (= acc n))
      l
      (let [;head (first l)
            tail (rest l)]
@@ -16,10 +33,10 @@
 (skip 1 (list 1 2 3))
 
 (defn test-skip []
-  (assert (=  '(1 2 3) (skip -5 (list 1 2 3))))
-  (assert (=  '(1 2 3) (skip  0 (list 1 2 3))))
-  (assert (=  '(2 3) (skip  1 (list 1 2 3))))
-  (assert (=  '() (skip 10 (list 1 2 3)))))
+  (assert (= '(1 2 3) (skip -5 (list 1 2 3))))
+  (assert (= '(1 2 3) (skip  0 (list 1 2 3))))
+  (assert (= '(2 3) (skip  1 (list 1 2 3))))
+  (assert (= '() (skip 10 (list 1 2 3)))))
 
 (test-skip)
 
