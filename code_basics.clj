@@ -1,14 +1,32 @@
 (ns code-basics
   (:require [clojure.string :refer [upper-case]])
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as s]))
 
 ;; *********** code-basics.com 26/50 ***********
+; почему-то не работает в REPL
+(defn next-chars [ch]
+  (println "ch:" ch "ch2" (seq ch))
+  (let [m (map int (seq ch))
+        m2 (map inc m)
+        m3 (map char m2)
+        m4 (s/join #"" m3)]
+    (println "m" m "m2" m2 "m3" m3 "m4" m4)
+    m4))
+
+(next-chars "abc")
+
+(defn test-next-chars []
+  (assert (= "" (next-chars "")))
+  (assert (= "bcd" (next-chars "abc")))
+  (assert (= "23456" (next-chars "12345"))))
+
+(test-next-chars)
 
 ;; *********** code-basics.com 25/50 ***********
 ; почему-то не работает в REPL
 
 (defn str-reverse [s1]
-  (str/reverse s1))
+  (s/reverse s1))
 
 (str-reverse "Hello")
 
