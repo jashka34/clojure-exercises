@@ -2,16 +2,27 @@
   (:require [clojure.string :refer [upper-case]])
   (:require [clojure.string :as s]))
 
+;; *********** code-basics.com 27/50 ***********
+(defn number-presenter [n]
+  (format "decimal %d  octal %o  hex %x  upper-case hex %X" n n n n))
+
+(defn test-number-presenter []
+  (assert (= "decimal 63  octal 77  hex 3f  upper-case hex 3F" (number-presenter 63)))
+  (assert (= "decimal 14  octal 16  hex e  upper-case hex E" (number-presenter 14))))
+
+(test-number-presenter)
+
 ;; *********** code-basics.com 26/50 ***********
-; почему-то не работает в REPL
+; почему-то не работает в REPL UPD чтобы работало, нужно запустить раздел (ns...)
 (defn next-chars [ch]
   (println "ch:" ch "ch2" (seq ch))
-  (let [m (map int (seq ch))
-        m2 (map inc m)
-        m3 (map char m2)
-        m4 (s/join #"" m3)]
-    (println "m" m "m2" m2 "m3" m3 "m4" m4)
-    m4))
+  ;; (let [m (map int (seq ch))
+  ;;       m2 (map inc m)
+  ;;       m3 (map char m2)
+  ;;       m4 (s/join #"" m3)]
+  ;;   (println "m" m "m2" m2 "m3" m3 "m4" m4)
+  ;;   m4)
+  (s/join #"" (map char (map inc (map int (seq ch))))))
 
 (next-chars "abc")
 
@@ -23,7 +34,7 @@
 (test-next-chars)
 
 ;; *********** code-basics.com 25/50 ***********
-; почему-то не работает в REPL
+; почему-то не работает в REPL UPD чтобы работало, нужно запустить раздел (ns...)
 
 (defn str-reverse [s1]
   (s/reverse s1))
