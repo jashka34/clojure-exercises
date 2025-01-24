@@ -2,6 +2,22 @@
   (:require [clojure.string :refer [upper-case]])
   (:require [clojure.string :as s]))
 
+;; *********** code-basics.com 28/50 ***********
+(defn zip [v1 v2]
+  (let [vz (map vector v1 v2)]
+    ;; (println vz)
+    vz))
+
+;; решение учителя
+;; (defn zip [v1 v2]
+;;   (mapv vector v1 v2))
+
+(defn test-zip []
+  (assert (= [] (zip [] [])))
+  (assert (= [[1 5] [2 6] [3 7] [4 8]] (zip  [1 2 3 4] [5 6 7 8])))
+  (assert (= [[1 2] [3 4]] (zip [1 3] [2 4]))))
+
+(test-zip)
 ;; *********** code-basics.com 27/50 ***********
 (defn number-presenter [n]
   (format "decimal %d  octal %o  hex %x  upper-case hex %X" n n n n))
