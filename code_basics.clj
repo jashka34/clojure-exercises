@@ -2,9 +2,19 @@
   (:require [clojure.string :refer [upper-case]])
   (:require [clojure.string :as s]))
 
+;; *********** code-basics.com 29/50 ***********
+(defn sum [v]
+  (reduce + 0 v))
+
+(defn test-sum []
+  (assert (= 0 (sum [])))
+  (assert (= -10 (sum [10 -20])))
+  (assert (= 10 (sum [1 2 3 4]))))
+
+(test-sum)
 ;; *********** code-basics.com 28/50 ***********
 (defn zip [v1 v2]
-  (let [vz (map vector v1 v2)]
+  (let [vz (mapv vector v1 v2)]
     ;; (println vz)
     vz))
 
