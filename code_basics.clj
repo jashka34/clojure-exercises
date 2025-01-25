@@ -1,6 +1,18 @@
 (ns code-basics
   (:require [clojure.string :refer [upper-case]])
   (:require [clojure.string :as s]))
+;; *********** code-basics.com 30/50 ***********
+(defn my-contains? [v n]
+  (let [s (some (fn [e] (= e n)) v)]
+    (println "s" s)
+    (boolean s)))
+
+(defn test-my-contains []
+  (assert (= true (my-contains? [1 2 4 9] 2)))
+  (assert (= false (my-contains? [1 2 4 9] 0)))
+  (assert (= true (my-contains? [1 2 4 9] 9))))
+
+(test-my-contains)
 
 ;; *********** code-basics.com 29/50 ***********
 (defn sum [v]
