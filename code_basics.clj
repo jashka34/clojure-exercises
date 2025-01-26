@@ -1,6 +1,28 @@
 (ns code-basics
   (:require [clojure.string :refer [upper-case]])
   (:require [clojure.string :as s]))
+;; *********** code-basics.com 31/50 ***********
+(defn partiphify [v n]
+  (println "v" v "n" n "pa" (partition-all n v))
+  (let [p (int (Math/ceil (/ (count v) n)))
+        rv1 (vec (map vec (partition-all p v)))
+        cv1 (count rv1)
+        rv (if (not= n cv1) (conj rv1 []) rv1)
+        ;; rv rv1
+        ]
+    (println "p:" p "rv1:" rv1 "cv1:" cv1 "rv:" rv)
+    rv))
+
+(partiphify [1 2 3 4 5] 2)
+(partiphify [1] 2)
+
+(defn test-partiphify []
+  (assert (= [[1] []] (partiphify [1] 2)))
+  (assert (= [[1] [2] [3]] (partiphify [1 2 3] 3)))
+  (assert (= [[1 2 3] [4 5]] (partiphify [1 2 3 4 5] 2))))
+
+(test-partiphify)
+
 ;; *********** code-basics.com 30/50 ***********
 (defn my-contains? [v n]
   (let [s (some (fn [e] (= e n)) v)]
