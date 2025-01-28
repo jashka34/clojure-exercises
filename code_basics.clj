@@ -1,15 +1,33 @@
 (ns code-basics
   (:require [clojure.string :refer [upper-case]])
-  (:require [clojure.string :as s]))
+  (:require [clojure.string :as s])
+  ;; (:require [clojure.pprint :as pp])
+  )
+
+;; *********** code-basics.com 33/50 ***********
+
+;; *********** code-basics.com 32/50 ***********
+(def my-xf
+  (comp
+   ;; (map #(* % 10))
+   (map (fn [n] (* n 10)))
+   (map #(/ % 5))
+   (filter even?)))
+
+(println (my-xf [(range 5)]))
+
+(defn test-my-xf []
+  (assert (= [0 2 4 6 8] #(into [] my-xf [(range 5)])))
+  ;; (assert (= 2450 (my-xf [(range 50)])))
+  )
+
+(test-my-xf)
 ;; *********** code-basics.com 31/50 ***********
 (defn partiphify [v n]
-  (println "v" v "n" n "pa" (partition-all n v))
   (let [p (int (Math/ceil (/ (count v) n)))
         rv1 (vec (map vec (partition-all p v)))
         cv1 (count rv1)
-        rv (if (not= n cv1) (conj rv1 []) rv1)
-        ;; rv rv1
-        ]
+        rv (if (not= n cv1) (conj rv1 []) rv1)]
     (println "p:" p "rv1:" rv1 "cv1:" cv1 "rv:" rv)
     rv))
 
