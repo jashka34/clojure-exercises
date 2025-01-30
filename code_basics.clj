@@ -6,18 +6,37 @@
 
 ;; *********** code-basics.com 33/50 ***********
 
-(defn student-names [v2]
-  (let [s1 (first v2)]
-    (println s1)
-    s1))
+(defn student-names
+  ([] (map first))
+  ([coll] (sequence (student-names) coll)))
+
+(defn lower-case-name
+  ([] (map s/lower-case))
+  ([coll] (sequence (lower-case-name) coll)))
+
+(defn slugify-names
+  ([] (map (fn [name] (s/replace name " " "-"))))
+  ([coll] (sequence (slugify-names) coll)))
+
+(def do-name-magic
+  (comp
+   (student-names)
+   (lower-case-name)
+   (slugify-names)))
 
 (def students [["Luke Skywalker" "Jedi"]
                ["Hermione Granger" "Magic"]
                ["Walter White" "Chemistry"]])
 
+(println (do-name-magic students))
+
 (defn test-students []
-  (assert (= "Luke Skywalker" (student-names (first students))))
-  (assert (= "Walter White" (student-names (get-in students [2])))))
+  (assert (= "Luke Skywalker" (get-in (vec (student-names students)) [0])))
+  (assert (= "Walter White" (get-in (vec (student-names students)) [2])))
+  (assert (= "luke skywalker" (get-in (vec (lower-case-name (student-names students))) [0])))
+  (assert (= "luke-skywalker" (get-in (vec (slugify-names (lower-case-name (student-names students)))) [0])))
+  ;; (assert (= "luke-skywalker" (get-in (do-name-magic students) [0])))
+  )
 
 (test-students)
 ;; *********** code-basics.com 32/50 ***********
