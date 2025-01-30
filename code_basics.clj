@@ -6,6 +6,20 @@
 
 ;; *********** code-basics.com 33/50 ***********
 
+(defn student-names [v2]
+  (let [s1 (first v2)]
+    (println s1)
+    s1))
+
+(def students [["Luke Skywalker" "Jedi"]
+               ["Hermione Granger" "Magic"]
+               ["Walter White" "Chemistry"]])
+
+(defn test-students []
+  (assert (= "Luke Skywalker" (student-names (first students))))
+  (assert (= "Walter White" (student-names (get-in students [2])))))
+
+(test-students)
 ;; *********** code-basics.com 32/50 ***********
 (def my-xf
   (comp
