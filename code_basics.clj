@@ -4,6 +4,8 @@
   ;; (:require [clojure.pprint :as pp])
   )
 
+;; *********** code-basics.com 34/50 ***********
+
 ;; *********** code-basics.com 33/50 ***********
 
 (defn student-names
@@ -28,15 +30,18 @@
                ["Hermione Granger" "Magic"]
                ["Walter White" "Chemistry"]])
 
-(println (do-name-magic students))
+(let [sjn (into [] do-name-magic students)]
+  (println sjn))
+
+(println (into [] do-name-magic students))
 
 (defn test-students []
   (assert (= "Luke Skywalker" (get-in (vec (student-names students)) [0])))
   (assert (= "Walter White" (get-in (vec (student-names students)) [2])))
   (assert (= "luke skywalker" (get-in (vec (lower-case-name (student-names students))) [0])))
   (assert (= "luke-skywalker" (get-in (vec (slugify-names (lower-case-name (student-names students)))) [0])))
-  ;; (assert (= "luke-skywalker" (get-in (do-name-magic students) [0])))
-  )
+  (assert (= "luke-skywalker" (get-in (into [] do-name-magic students) [0])))
+  (assert (= ["luke-skywalker" "hermione-granger" "walter-white"] (into [] do-name-magic students))))
 
 (test-students)
 ;; *********** code-basics.com 32/50 ***********
