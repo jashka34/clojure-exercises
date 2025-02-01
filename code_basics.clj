@@ -4,7 +4,20 @@
   ;; (:require [clojure.pprint :as pp])
   )
 
+;; *********** code-basics.com 35/50 ***********
+
 ;; *********** code-basics.com 34/50 ***********
+(defn resolve [hm t]
+  (get hm t "DNS_PROBE_FINISHED_NXDOMAIN"))
+
+(defn test-resolve []
+  (assert (= "103.95.84.1"  (resolve {"rubyonrails.org" "211.116.107.5" "clojure.org" "103.95.84.1" "phoenixframework.org" "234.214.199.63" "reactjs.org" "20.199.101.214"}
+                                     "clojure.org")))
+  (assert (= "234.214.199.63"  (resolve {"rhythm.ru" "201.116.147.4" "building.ru" "103.176.11.27" "hexlet.io" "234.214.199.63" "brass.ru" "201.116.147.4"}
+                                        "hexlet.io")))
+  (assert (= "DNS_PROBE_FINISHED_NXDOMAIN"  (resolve {"some.com" "127.0.0.1"} "test.net"))))
+
+(test-resolve)
 
 ;; *********** code-basics.com 33/50 ***********
 
