@@ -6,6 +6,18 @@
 
 ;; *********** code-basics.com 35/50 ***********
 
+; AI version:
+(defn freq [coll]
+  (reduce (fn [acc x]
+            (update acc x (fnil inc 0)))
+          {}
+          coll))
+
+(defn test-freq []
+  (assert (= {"a" 4, "b" 2, "c" 2, "d" 1} (freq ["a" "b" "c" "a" "a" "c" "a" "d" "b"])))
+  (assert (= {"Clojure" 2, "Ruby" 2, "Elixir" 1, "HTML" 1, "JS" 1} (freq ["Clojure" "Ruby" "Clojure" "Elixir" "Ruby" "HTML" "JS"])))
+  (assert (= {:a 3, :b 1, :c 1, :d 1} (freq [:a :b :c :d :a :a]))))
+
 ;; *********** code-basics.com 34/50 ***********
 (defn resolve [hm t]
   (get hm t "DNS_PROBE_FINISHED_NXDOMAIN"))
