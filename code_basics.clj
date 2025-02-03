@@ -3,22 +3,22 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
-
 ;; *********** code-basics.com 35/50 ***********
 (defn freq [v]
   (defn f [acc el]
-    (println "acc:" (vector acc) "el:" el "v:" v)
-    ;; (let [fnd (get-in v2)])
-    (if (contains? v el)
-      (let [el-count (acc el)]
-        (println "get! el-count:" el-count))
-      (println "NOT get"))
-    (assoc acc el (fnil inc (acc el) 0)))
+    (println "acc:" acc "el:" el "v:" v)
+    (if (contains? acc el)
+      (do
+        (println "assoc inc to" el)
+        (assoc acc el (inc (acc el))))
+      (do
+        (println "assoc 1 to" el)
+        (assoc acc el 1))))
   (reduce f
           {}
           v))
 
-(freq ["a" "b" "c" "a" "a" "c" "a" "d" "b"])
+(freq ["a" "a" "b" "a" "b" "a" "c" "a" "a" "c" "a" "d" "b"])
 
 ; AI version:
 ;; (defn freq [coll]
