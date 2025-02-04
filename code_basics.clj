@@ -3,6 +3,17 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
+;; *********** code-basics.com 36/50 ***********
+(defn to-sorted-map [m]
+  (into (sorted-map) m))
+
+(defn test-to-sorted-map []
+  (assert (= {} (to-sorted-map {})))
+  (assert (= {1 :a 2 :b 3 :c} (to-sorted-map {3 :c 2 :b 1 :a})))
+  (assert (= {:a 1 :b 2 :c 3} (to-sorted-map {:c 3 :b 2 :a 1}))))
+
+(test-to-sorted-map)
+
 ;; *********** code-basics.com 35/50 ***********
 (defn freq [v]
   (defn f [acc el]
