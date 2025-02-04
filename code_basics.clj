@@ -3,6 +3,24 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
+
+;; *********** code-basics.com 38/50 ***********
+
+;; *********** code-basics.com 37/50 ***********
+(defn transit [a1 a2 n]
+  ;; (println (deref a1) @a2)
+  (def lock (Object.))
+  (locking lock
+    [(swap! a1 - n)
+     (swap! a2 + n)]))
+
+(transit (atom 30) (atom 10) 15)
+
+(defn test-transit []
+  (assert (= [80 40] (transit (atom 100) (atom 20) 20)))
+  (assert (= [0 60] (transit (atom 40) (atom 20) 40))))
+
+(test-transit)
 ;; *********** code-basics.com 36/50 ***********
 (defn to-sorted-map [m]
   (into (sorted-map) m))
