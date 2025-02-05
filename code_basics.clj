@@ -5,7 +5,37 @@
   )
 
 ;; *********** code-basics.com 38/50 ***********
+(defn vec-even? [v]
+  (defn f [acc el]
+    ;; (println "acc:" acc "el:" el)
+    (if (not (even? el))
+      (do
+         ;; (println "not even!" el)
+        false)
+      (do
+         ;; (println "even!" el)
+        acc)))
 
+  (if (empty? v)
+    false
+    (reduce f
+            true
+            v)))
+
+;; решение учителя 
+;; (defn vec-even? [avec]
+;;   (and
+;;    (not (empty? avec))
+;;    (vector? avec)
+;;    (every? even? avec)))
+
+(defn test-vec-even? []
+  (assert (= false (vec-even? [])))
+  (assert (= true (vec-even? [0 2 4 6])))
+  (assert (= false (vec-even? [0 2 5 6])))
+  (assert (= false (vec-even? [1 3 5]))))
+
+(test-vec-even?)
 ;; *********** code-basics.com 37/50 ***********
 (defn transit [a1 a2 n]
   ;; (println (deref a1) @a2)
