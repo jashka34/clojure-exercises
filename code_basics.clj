@@ -4,6 +4,21 @@
   ;; (:require [clojure.pprint :as pp])
   )
 
+;; *********** code-basics.com 39/50 ***********
+(defn transit [from to n]
+  (send from (fn [cur]
+               (- cur n)))
+  (await from)
+  (send to + n)
+  (await to)
+  [@from @to])
+
+(defn test-transit []
+  (assert (= [80 40] (transit (agent 100) (agent 20) 20)))
+  (assert (= [0 60] (transit (agent 40) (agent 20) 40)))
+  (assert (= [80 70] (transit (agent 100) (agent 50) 20))))
+(test-transit)
+
 ;; *********** code-basics.com 38/50 ***********
 (defn vec-even? [v]
   (defn f [acc el]
@@ -41,8 +56,9 @@
   ;; (println (deref a1) @a2)
   (def lock (Object.))
   (locking lock
-    [(swap! a1 - n)
-     (swap! a2 + n)]))
+    (let [s1 (swap! a1 - n)
+          s2 (swap! a2 + n)]
+      [s1 s2])))
 
 (transit (atom 30) (atom 10) 15)
 
