@@ -4,13 +4,24 @@
   ;; (:require [clojure.pprint :as pp])
   )
 
+;; *********** code-basics.com 40/50 ***********
+(defn mf []
+  (def my-atom (atom 0))
+  (add-watch my-atom "my-w" (fn [key val old-state new-state]
+                              (print (format "Change state from %d to %d." old-state new-state))))
+  (swap! my-atom inc)
+  (swap! my-atom inc)
+  (swap! my-atom dec))
+(mf)
 ;; *********** code-basics.com 39/50 ***********
 (defn transit [from to n]
-  (send from (fn [cur]
-               (- cur n)))
-  (await from)
-  (send to + n)
-  (await to)
+  ;; (send from (fn [cur]
+  ;;              (- cur n)))
+  ;; (await from)
+  ;; (send to + n)
+  ;; (await to)
+  (await (send from - n))
+  (await (send to + n))
   [@from @to])
 
 (defn test-transit []
