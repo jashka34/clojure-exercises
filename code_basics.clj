@@ -4,14 +4,40 @@
   ;; (:require [clojure.pprint :as pp])
   )
 
+;; *********** code-basics.com 41/50 ***********
+;; (defmulti my-calc (fn [op _ _] op
+;;                     ;; ((println "v" v "fv" (first v))
+;;                     ;;        (first v))
+;;                   ))
+;;
+;; (defmethod my-calc "+" [[_ n b]] (+ n b)
+;;   ;; (defmethod my-calc :default [_] (throw (ex-info "ololo" _)))
+;;  )
+;;   ;; (defmethod my-calc "-" [_] (println "calc -"))
+(defmulti my-calc (fn [[operation _ _]] operation))
+(defmethod my-calc "+" [[_ first-op second-op]] (+ first-op second-op))
+(defmethod my-calc "-" [[_ first-op second-op]] (- first-op second-op))
+(defmethod my-calc "*" [[_ first-op second-op]] (* first-op second-op))
+
+(my-calc ["+" 1 2])
+(my-calc ["-" 3 1])
+
+(defn test-my-calc []
+  (assert (= 3 (my-calc ["+" 1 2])))
+  (assert (= 2 (my-calc ["-" 3 1])))
+  (assert (= 9 (my-calc ["*" 3 3])))
+  (assert (= 2 (my-calc ["/" 8 4])))
+  (assert (= 2 (my-calc ["%" 8 4]))))
+;; (test-my-calc)
 ;; *********** code-basics.com 40/50 ***********
 (defn mf []
   (def my-atom (atom 0))
-  (add-watch my-atom "my-w" (fn [key val old-state new-state]
-                              (print (format "Change state from %d to %d." old-state new-state))))
+  (add-watch my-atom :my-watcher (fn [key val old-state new-state]
+                                   (print (format "Change state from %d to %d." old-state new-state))))
   (swap! my-atom inc)
   (swap! my-atom inc)
-  (swap! my-atom dec))
+  (swap! my-atom dec)
+  (remove-watch my-atom :my-watcher))
 (mf)
 ;; *********** code-basics.com 39/50 ***********
 (defn transit [from to n]
