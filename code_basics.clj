@@ -5,19 +5,21 @@
   )
 
 ;; *********** code-basics.com 41/50 ***********
-;; (defmulti my-calc (fn [op _ _] op
-;;                     ;; ((println "v" v "fv" (first v))
-;;                     ;;        (first v))
-;;                   ))
-;;
-;; (defmethod my-calc "+" [[_ n b]] (+ n b)
-;;   ;; (defmethod my-calc :default [_] (throw (ex-info "ololo" _)))
-;;  )
-;;   ;; (defmethod my-calc "-" [_] (println "calc -"))
-(defmulti my-calc (fn [[operation _ _]] operation))
-(defmethod my-calc "+" [[_ first-op second-op]] (+ first-op second-op))
-(defmethod my-calc "-" [[_ first-op second-op]] (- first-op second-op))
-(defmethod my-calc "*" [[_ first-op second-op]] (* first-op second-op))
+(defmulti my-calc (fn [v]
+                     ;; (println "v" v "fv" (first v))
+                    (first v)))
+
+(defmethod my-calc "+" [v] (+ (second v) (last v)))
+(defmethod my-calc "-" [v] (- (second v) (last v)))
+(defmethod my-calc "*" [v] (* (second v) (last v)))
+(defmethod my-calc "/" [v] (/ (second v) (last v)))
+
+; Решение учителя
+;; (defmulti my-calc (fn [[operation _ _]] operation))
+;; (defmethod my-calc "+" [[_ first-op second-op]] (+ first-op second-op))
+;; (defmethod my-calc "-" [[_ first-op second-op]] (- first-op second-op))
+;; (defmethod my-calc "*" [[_ first-op second-op]] (* first-op second-op))
+;; (defmethod my-calc "/" [[_ first-op second-op]] (/ first-op second-op))
 
 (my-calc ["+" 1 2])
 (my-calc ["-" 3 1])
@@ -27,8 +29,9 @@
   (assert (= 2 (my-calc ["-" 3 1])))
   (assert (= 9 (my-calc ["*" 3 3])))
   (assert (= 2 (my-calc ["/" 8 4])))
-  (assert (= 2 (my-calc ["%" 8 4]))))
-;; (test-my-calc)
+  ;; (assert (= 2 (my-calc ["%" 8 4])))
+  )
+(test-my-calc)
 ;; *********** code-basics.com 40/50 ***********
 (defn mf []
   (def my-atom (atom 0))
