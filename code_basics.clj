@@ -4,6 +4,30 @@
   ;; (:require [clojure.pprint :as pp])
   )
 
+;; *********** code-basics.com 42/50 ***********
+(defprotocol SaysSomethig
+  (say-somthing [this] "How, World!"))
+
+(defrecord Human []
+  SaysSomethig
+  (say-somthing [_] (println "Hello, World!")))
+
+(defrecord Cat []
+  SaysSomethig
+  (say-somthing [_] (println "Meow, World!")))
+
+(defrecord Dog []
+  SaysSomethig
+  (say-somthing [_] (println "Bark, World!")))
+
+(def human (Human.))
+(def cat2 (Cat.))
+(def dog (Dog.))
+
+(say-somthing human)
+(say-somthing cat2)
+(say-somthing dog)
+
 ;; *********** code-basics.com 41/50 ***********
 (defmulti my-calc (fn [v]
                      ;; (println "v" v "fv" (first v))
