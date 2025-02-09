@@ -4,6 +4,15 @@
   ;; (:require [clojure.pprint :as pp])
   )
 
+;; *********** code-basics.com 43/50 ***********
+(defn mf2 [_] (println "Hello from fn!"))
+(defmacro mm2 [n] (println "Hello from macro!")
+  n)
+
+(do
+  (mf2 (println (+ 1 2)))
+  (mm2 (println (+ 1 2))))
+
 ;; *********** code-basics.com 42/50 ***********
 (defprotocol SaysSomethig
   (say-somthing [this] "How, World!"))
