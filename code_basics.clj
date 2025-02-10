@@ -5,6 +5,11 @@
   )
 
 ;; *********** code-basics.com 43/50 ***********
+(defmacro triplet-macro [a b c]
+  (list list a b c))
+
+(triplet-macro  1 2 3)
+;; *********** code-basics.com 43/50 ***********
 (defn mf2 [_] (println "Hello from fn!"))
 (defmacro mm2 [n] (println "Hello from macro!")
   n)
@@ -12,6 +17,8 @@
 (do
   (mf2 (println (+ 1 2)))
   (mm2 (println (+ 1 2))))
+
+(macroexpand-1 '(mm2 (println (+ 1 2))))
 
 ;; *********** code-basics.com 42/50 ***********
 (defprotocol SaysSomethig
