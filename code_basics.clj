@@ -3,7 +3,16 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
+;; *********** code-basics.com 44/50 ***********
+(defmacro postfix-notation [[n1 n2 zn]]
+  (list zn n1 n2))
 
+(defn test-postfix-notation []
+  (assert (= 5 (postfix-notation [2 3 +])))
+  (assert (= 2 (postfix-notation [8 6 -])))
+  (assert (= true (postfix-notation [2 2 =]))))
+
+(test-postfix-notation)
 ;; *********** code-basics.com 43/50 ***********
 (defmacro triplet-macro [a b c]
   (list list a b c))
