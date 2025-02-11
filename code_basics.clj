@@ -3,6 +3,17 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
+;; *********** code-basics.com 48/50 ***********
+(defmacro auto-sum [n]
+  `(let [my-var# 10
+         res (+ my-var# ~n)]
+     ;; (println  "n:" ~n "my-var#:" my-var#)
+     res))
+
+(auto-sum 5)
+
+(gensym)
+`(one#)
 ;; *********** code-basics.com 47/50 ***********
 (defmacro strange-print [str]
   `(do
