@@ -3,9 +3,26 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
+;; *********** code-basics.com 45/50 ***********
+(def forbidden-list #{(symbol "clojure") (symbol "is") (symbol "bad")})
+
+(defmacro special-defn [name args body]
+  (if-not (contains? forbidden-list name)
+    (list 'defn name args body)
+    ;; '(defn name args body)
+    "you can't define this function"))
+
+(special-defn my-sum [a b] (+ a b))
+(special-defn my-diff [a b] (- a b))
+(my-sum 1 2)
+
+(macroexpand-1 '(special-defn my-sum [a b] (+ a b)))
+
 ;; *********** code-basics.com 44/50 ***********
 (defmacro postfix-notation [[n1 n2 zn]]
   (list zn n1 n2))
+
+(macroexpand-1 '(postfix-notation (1 2 +)))
 
 (defn test-postfix-notation []
   (assert (= 5 (postfix-notation [2 3 +])))
