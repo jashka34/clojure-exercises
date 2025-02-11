@@ -3,6 +3,16 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
+;; *********** code-basics.com 46/50 ***********
+(defmacro strange-macro [coll]
+  `(apply - (apply + ~coll) ~coll))
+
+(strange-macro [1 2 3])
+
+(defn test-strange-macro []
+  (assert (= 0 (strange-macro [1 2 3 4])))
+  (assert (= 0 (strange-macro [1 2 3]))))
+(test-strange-macro)
 ;; *********** code-basics.com 45/50 ***********
 (def forbidden-list #{(symbol "clojure") (symbol "is") (symbol "bad")})
 
@@ -18,6 +28,10 @@
 
 (macroexpand-1 '(special-defn my-sum [a b] (+ a b)))
 
+(defn test-my []
+  (assert (= 3 (my-sum 1 2)))
+  (assert (= 3 (my-diff 5 2))))
+(test-my)
 ;; *********** code-basics.com 44/50 ***********
 (defmacro postfix-notation [[n1 n2 zn]]
   (list zn n1 n2))
