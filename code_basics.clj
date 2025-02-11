@@ -3,6 +3,24 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
+;; *********** code-basics.com 47/50 ***********
+(defmacro strange-print [str]
+  `(do
+     ~@(println (s/reverse str))
+     ~@(println (s/upper-case str))
+     ~@(println (s/lower-case str))
+     ~str))
+
+(strange-print "fOo")
+
+(defmacro print-els [coll]
+  `(do
+     ~@(map println coll)
+     ~coll))
+
+(print-els [1 2 3])
+
+(macroexpand-1 '(print-els [1 2 3]))
 ;; *********** code-basics.com 46/50 ***********
 (defmacro strange-macro [coll]
   `(apply - (apply + ~coll) ~coll))
