@@ -3,7 +3,7 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
-;; *********** code-basics.com 49/50 ***********
+;; *********** code-basics.com 50/50 ***********
 (defmacro macro-inc [n#]
   ;; `(inc ~n#)
   (list inc n#) ;; решение учителя
@@ -14,7 +14,7 @@
   (assert (= 7 (macro-inc 6))))
 
 (test-macro-inc)
-;; *********** code-basics.com 48/50 ***********
+;; *********** code-basics.com 49/50 ***********
 (defmacro auto-sum [n]
   `(let [my-var# 10
          res (+ my-var# ~n)]
@@ -25,7 +25,7 @@
 
 (gensym)
 `(one#)
-;; *********** code-basics.com 47/50 ***********
+;; *********** code-basics.com 48/50 ***********
 (defmacro strange-print [str]
   `(do
      ~@(println (s/reverse str))
@@ -43,7 +43,7 @@
 (print-els [1 2 3])
 
 (macroexpand-1 '(print-els [1 2 3]))
-;; *********** code-basics.com 46/50 ***********
+;; *********** code-basics.com 47/50 ***********
 (defmacro strange-macro [coll]
   `(apply - (apply + ~coll) ~coll))
 
@@ -53,7 +53,7 @@
   (assert (= 0 (strange-macro [1 2 3 4])))
   (assert (= 0 (strange-macro [1 2 3]))))
 (test-strange-macro)
-;; *********** code-basics.com 45/50 ***********
+;; *********** code-basics.com 46/50 ***********
 (def forbidden-list #{(symbol "clojure") (symbol "is") (symbol "bad")})
 
 (defmacro special-defn [name args body]
@@ -72,7 +72,7 @@
   (assert (= 3 (my-sum 1 2)))
   (assert (= 3 (my-diff 5 2))))
 (test-my)
-;; *********** code-basics.com 44/50 ***********
+;; *********** code-basics.com 45/50 ***********
 (defmacro postfix-notation [[n1 n2 zn]]
   (list zn n1 n2))
 
@@ -84,7 +84,7 @@
   (assert (= true (postfix-notation [2 2 =]))))
 
 (test-postfix-notation)
-;; *********** code-basics.com 43/50 ***********
+;; *********** code-basics.com 44/50 ***********
 (defmacro triplet-macro [a b c]
   (list list a b c))
 
