@@ -3,6 +3,17 @@
   (:require [clojure.string :as s])
   ;; (:require [clojure.pprint :as pp])
   )
+;; *********** code-basics.com 49/50 ***********
+(defmacro macro-inc [n#]
+  ;; `(inc ~n#)
+  (list inc n#) ;; решение учителя
+  )
+
+(defn test-macro-inc []
+  (assert (= 5 (macro-inc 4)))
+  (assert (= 7 (macro-inc 6))))
+
+(test-macro-inc)
 ;; *********** code-basics.com 48/50 ***********
 (defmacro auto-sum [n]
   `(let [my-var# 10
